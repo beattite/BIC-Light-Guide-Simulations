@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# Number of events
+EVENTS=100000
+GAP=air # air, grease, or cookie
+WRAP=0 # 1 for teflon light guide wrap, 0 for no wrap
+TYPE=S13-BIC
+
+for LENGTH in 5 10 15 20 25 30 35 40 45 50 55 60 65 70 75 80 85 90 95 100
+do
+for SHAPE in g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 # b1 b2 b3 b4 b5 b6 b7 b8 b9 b10 b11 b12
+do
+  # Template and output Geant4 macro names
+  TEMPLATE_MACROS=./macros/batch-template.mac
+  MACROS=./macros/batch-$LENGTH-mm-$SHAPE-$GAP.mac
+
+  # Navigate into the build directory
+  cd ~/BIC/GlueXLG-build
+
+  # Create new Geant4 macros from template
+  cp ${TEMPLATE_MACROS} ${MACROS}
+
+  # Set hasGrease and hasCookie based on desired gap material
+  if [ "$GAP" = "air" ]; then
+    sed -i "s;_GREASE;0;g" ${MACROS}
+    sed -i "s;_COOKIE;0;g" ${MACROS}
+  elif [ "$GAP" = "grease" ]; then
+    sed -i "s;_GREASE;1;g" ${MACROS}
+    sed -i "s;_COOKIE;0;g" ${MACROS}
+  elif [ "$GAP" = "cookie" ]; then
+    sed -i "s;_GREASE;0;g" ${MACROS}
+    sed -i "s;_COOKIE;1;g" ${MACROS}
+  fi
+
+  # Set hasWrap, events, length, and shape
+  sed -i "s;_WRAP;$WRAP;g" ${MACROS}
+  sed -i "s;_EVENTS;$EVENTS;g" ${MACROS}
+  sed -i "s;_LENGTH;$LENGTH;g" ${MACROS}
+  sed -i "s;_SHAPE;$SHAPE;g" ${MACROS}
+
+  # Set detector type
+  sed -i "s;_TYPE;$TYPE;g" ${MACROS}
+
+  # Pass macros to executable
+  ./lightguides ${MACROS}
+  
+  rm ${MACROS}
+done
+done

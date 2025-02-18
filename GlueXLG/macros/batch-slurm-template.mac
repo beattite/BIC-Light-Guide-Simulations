@@ -1,0 +1,25 @@
+/vis/ASCIITree/verbose 13
+/vis/drawTree
+
+/detector/lightguideSizeAbottom _SIZEABOTTOM mm
+/detector/lightguideSizeAtop _SIZEATOP mm
+/detector/lightguideSizeAheight _SIZEAHEIGHT mm
+/detector/lightguideSizeBbottom _SIZEBBOTTOM mm
+/detector/lightguideSizeBtop _SIZEBTOP mm
+/detector/lightguideSizeBheight _SIZEBHEIGHT mm
+/detector/lightguideLength _LENGTH mm
+/detector/hasWrap _WRAP
+/detector/hasGrease _GREASE
+/detector/hasCookie _COOKIE
+/detector/detectorType _TYPE
+/detector/lightguideShape _SHAPE
+
+#/run/numberOfThreads 8
+/run/initialize
+
+/control/execute gps-default.mac
+/gps/pos/centre 0. 0. -35 cm
+/gps/ene/mono _ENERGY GeV
+
+#/run/printProgress 10
+/run/beamOn _EVENTS

@@ -1,0 +1,12 @@
+/detector/lightguideLength _LENGTH mm
+/detector/hasWrap _WRAP
+/detector/hasGrease _GREASE
+/detector/hasCookie _COOKIE
+/detector/lightguideShape _SHAPE
+/detector/detectorType _TYPE
+
+#/run/numberOfThreads 8
+/run/initialize
+
+/run/printProgress 1000
+/run/beamOn _EVENTS

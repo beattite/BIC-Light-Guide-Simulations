@@ -1,0 +1,14 @@
+/vis/ASCIITree/verbose 13
+/vis/drawTree
+
+/detector/lightGuideLength 30 mm
+
+#/run/numberOfThreads 8
+/run/initialize
+
+/control/execute gps-default.mac
+/gps/pos/centre 0. 0. -35 cm
+/gps/ene/mono 4 GeV
+
+#/run/printProgress 10
+/run/beamOn 100
